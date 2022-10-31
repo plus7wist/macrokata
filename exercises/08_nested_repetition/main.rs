@@ -4,7 +4,21 @@ fn print_vec<V: std::fmt::Debug>(vec: &Vec<V>) {
 }
 ////////// DO NOT CHANGE ABOVE HERE /////////
 
-// TODO: create `graph!()` macro.
+macro_rules! graph {
+    //  Each arm
+    //<------------------------------------>
+    //                     End node list
+    //                  <------------------>
+    ( $( $start:literal -> ( $( $end:literal ), * ) ; )+ ) => {
+        {
+            let mut graph = vec![];
+            $(
+                $( graph.push(($start, $end)); )*
+            )+
+            graph
+        }
+    }
+}
 
 ////////// DO NOT CHANGE BELOW HERE /////////
 

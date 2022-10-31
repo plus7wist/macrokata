@@ -1,4 +1,11 @@
-// TODO: Create the `curry!()` macro.
+macro_rules! curry {
+    ( ($a:ident : $t:ty) => _, $body: block ) => {
+        move |$a: $t| $body
+    };
+    ( ($a1:ident : $t1:ty) => $( ($a:ident : $t:ty) => )+ _, $body: block ) => {
+        move |$a1: $t1| curry!( $( ($a : $t) => )+ _, $body )
+    };
+}
 
 ////////// DO NOT CHANGE BELOW HERE /////////
 

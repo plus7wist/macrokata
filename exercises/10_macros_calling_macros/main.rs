@@ -5,14 +5,24 @@ use std::fmt::Debug;
 fn print_pair<K: Debug, V: Debug>(pair: (K, V)) {
     println!("{pair:#?}");
 }
+
 fn print_hashmap<K: Debug, V: Debug>(hashmap: &HashMap<K, V>) {
     println!("{hashmap:#?}");
 }
-////////// DO NOT CHANGE ABOVE HERE /////////
 
-// TODO: Create a `pair!()` macro.
+macro_rules! pair {
+    ($first: expr => $second: expr) => {
+        ($first, $second)
+    };
+}
 
-// TODO: Create a `hashmap!()` macro that uses the `pair!()` macro.
+macro_rules! hashmap {
+    ( $( $key: expr => $value: expr ,)* ) => {
+        HashMap::from([
+            $( pair!($key => $value), )*
+        ])
+    };
+}
 
 ////////// DO NOT CHANGE BELOW HERE /////////
 
